@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Employee Management System</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="topbar">
+    <a class="brand" href="/">
+        <span class="brand-icon">E</span>
+        <span>
+            <strong>PeopleDesk</strong>
+            <small>Employee Management</small>
+        </span>
+    </a>
+
+    <span class="workspace">HR Workspace</span>
+</header>
+
+<main class="container">
+
+    <section class="heading">
+        <div>
+            <p class="eyebrow">HUMAN RESOURCES</p>
+            <h1>Employee Management</h1>
+            <p class="muted">Manage your people, all in one place.</p>
+        </div>
+
+        <button id="addEmployeeBtn" class="btn primary">
+            + Add Employee
+        </button>
+    </section>
+
+    <section class="stats">
+        <article>
+            <span>Total Employees</span>
+            <strong id="totalEmployees">0</strong>
+            <small>Records in directory</small>
+        </article>
+
+        <article>
+            <span>Departments</span>
+            <strong id="totalDepartments">0</strong>
+            <small>Departments in results</small>
+        </article>
+
+        <article>
+            <span>Showing Results</span>
+            <strong id="showingEmployees">0</strong>
+            <small>Based on current search</small>
+        </article>
+    </section>
+
+    <section class="panel">
+
+        <div class="panel-heading">
+            <h2>Employee Directory</h2>
+            <p class="muted">
+                View, search, edit, and remove employee records.
+            </p>
+        </div>
+
+        <div class="toolbar">
+            <input
+                id="searchInput"
+                type="search"
+                placeholder="Search name, department or role..."
+                aria-label="Search employees"
+            >
+
+            <label>
+                Sort by
+
+                <select id="sortBy">
+                    <option value="id">Recently added</option>
+                    <option value="name">Name</option>
+                    <option value="department">Department</option>
+                    <option value="role">Role</option>
+                    <option value="salary">Salary</option>
+                    <option value="join_date">Join date</option>
+                </select>
+            </label>
+
+            <button id="sortOrder" class="btn secondary">
+                Newest
+            </button>
+        </div>
+
+        <div id="notice" class="notice" role="status" hidden></div>
+
+        <div class="table-wrap">
+            <table>
+                <thead>
+                    <tr>
+                        <th>EMPLOYEE</th>
+                        <th>DEPARTMENT</th>
+                        <th>ROLE</th>
+                        <th>SALARY</th>
+                        <th>JOIN DATE</th>
+                        <th>ACTIONS</th>
+                    </tr>
+                </thead>
+
+                <tbody id="employeeTable">
+                    <tr>
+                        <td colspan="6">Loading employees...</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="table-footer">
+            <span id="tableSummary">Loading records...</span>
+            <span>Employee API</span>
+        </div>
+
+    </section>
+
+    <footer>
+        © <span id="year"></span> PeopleDesk · WeIntern Task 2
+    </footer>
+
+</main>
+
+<dialog id="employeeDialog">
+    <form id="employeeForm" novalidate>
+
+        <div class="dialog-head">
+            <div>
+                <p class="eyebrow">EMPLOYEE RECORD</p>
+                <h2 id="dialogTitle">Add Employee</h2>
+            </div>
+
+            <button
+                type="button"
+                id="closeDialog"
+                class="close"
+                aria-label="Close"
+            >×</button>
+        </div>
+
+        <input type="hidden" id="employeeId">
+
+        <div class="form-grid">
+
+            <label>
+                Full name *
+                <input
+                    id="name"
+                    maxlength="100"
+                    required
+                    placeholder="e.g. Priya Sharma"
+                >
+            </label>
+
+            <label>
+                Department *
+                <input
+                    id="department"
+                    maxlength="100"
+                    required
+                    placeholder="e.g. IT"
+                >
+            </label>
+
+            <label>
+                Role / Job title *
+                <input
+                    id="role"
+                    maxlength="100"
+                    required
+                    placeholder="e.g. Software Developer"
+                >
+            </label>
+
+            <label>
+                Monthly salary (₹) *
+                <input
+                    id="salary"
+                    type="number"
+                    min="0"
+                    step="0.01"
+                    required
+                    placeholder="30000"
+                >
+            </label>
+
+            <label class="full">
+                Joining date *
+                <input id="join_date" type="date" required>
+            </label>
+
+        </div>
+
+        <p class="hint">
+            All fields are required. Salary cannot be negative.
+        </p>
+
+        <div id="formError" class="error" role="alert" hidden></div>
+
+        <div class="dialog-actions">
+            <button type="button" id="cancelDialog" class="btn secondary">
+                Cancel
+            </button>
+
+            <button
+                id="saveEmployeeBtn"
+                class="btn primary"
+                type="submit"
+            >
+                Save Employee
+            </button>
+        </div>
+
+    </form>
+</dialog>
+
+<script src="script.js"></script>
+
+</body>
+</html>
